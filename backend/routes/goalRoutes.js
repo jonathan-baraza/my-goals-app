@@ -6,6 +6,7 @@ const {
   updateGoal,
   deleteGoal,
 } = require("../controllers/goalController");
+const { protect } = require("../middleware/authMiddleware");
 // router.get("/", getGoals);
 // router.post("/", postGoal);
 // router.put("/:id", updateGoal);
@@ -13,7 +14,7 @@ const {
 
 //using route chaining.
 
-router.route("/").get(getGoals).post(postGoal);
-router.route("/:id").put(updateGoal).delete(deleteGoal);
+router.route("/").get(protect, getGoals).post(protect, postGoal);
+router.route("/:id").put(protect, updateGoal).delete(protect, deleteGoal);
 
 module.exports = router;
